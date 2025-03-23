@@ -39,16 +39,16 @@
   <body>
     <model-viewer
       src="model.glb"
+      ios-src="model.usdz"
       ar
       ar-modes="scene-viewer webxr quick-look"
+      ar-scale="auto"
       auto-rotate
       camera-controls
       environment-image="neutral"
-      exposure="1"
       shadow-intensity="1"
-      style="width: 100vw; height: 100vh;"
+      exposure="1"
     >
-      <!-- Przycisk AR -->
       <button slot="ar-button" class="ar-button">📱 Zobacz w AR</button>
     </model-viewer>
   </body>
