@@ -1,53 +1,36 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <title>AR – drzwi Beksińskiego</title>
-    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <meta charset="utf-8">
+    <title>AR z kamerą i wyglądem jak model-viewer</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.min.js"></script>
     <style>
-      body {
-        margin: 0;
-        padding: 0;
-        background: #000;
-      }
-
-      model-viewer {
-        width: 100vw;
-        height: 100vh;
-        display: block;
-      }
-
-      .ar-button {
-        position: absolute;
-        bottom: 24px;
-        left: 50%;
-        transform: translateX(-50%);
-        background-color: #000;
-        color: #fff;
-        border: none;
-        border-radius: 6px;
-        padding: 14px 26px;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-        z-index: 10;
-      }
+      body { margin: 0; overflow: hidden; }
     </style>
   </head>
   <body>
-    <model-viewer
-      src="model.glb"
-      ios-src="model.usdz"
-      ar
-      ar-modes="scene-viewer webxr quick-look"
-      ar-scale="auto"
-      auto-rotate
-      camera-controls
-      environment-image="neutral"
-      shadow-intensity="1"
-      exposure="1"
+    <a-scene
+      vr-mode-ui="enabled: false"
+      embedded
+      arjs="sourceType: webcam; trackingMethod: best; debugUIEnabled: false;"
+      renderer="antialias: true; logarithmicDepthBuffer: true;"
     >
-      <button slot="ar-button" class="ar-button">📱 Zobacz w AR</button>
-    </model-viewer>
+      <!-- MODEL bez markera -->
+      <a-entity 
+        gltf-model="model.glb"
+        scale="1.5 1.5 1.5"
+        position="0 0 -3"
+        rotation="0 180 0"
+        animation-mixer>
+      </a-entity>
+
+      <!-- Światła -->
+      <a-entity light="type: ambient; intensity: 1.2"></a-entity>
+      <a-entity light="type: directional; intensity: 1.2" position="1 2 1"></a-entity>
+
+      <!-- Kamera -->
+      <a-entity camera></a-entity>
+    </a-scene>
   </body>
 </html>
