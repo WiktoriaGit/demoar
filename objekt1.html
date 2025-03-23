@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>AR – Dzieło Beksińskiego</title>
+    <title>AR – Model drzwi</title>
+    <meta charset="utf-8">
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.min.js"></script>
   </head>
-  <body>
+  <body style="margin: 0; overflow: hidden">
     <a-scene embedded arjs>
+      <!-- Marker Hiro -->
       <a-marker preset="hiro">
-        <!-- Twój model z poprawioną nazwą -->
-        <a-entity gltf-model="model.glb"
-                  scale="0.2 0.2 0.2"
-                  position="0 0 0.1"
-                  rotation="0 0 0">
+        <!-- Twój model -->
+        <a-entity 
+          gltf-model="model.glb"
+          scale="0.05 0.05 0.05"
+          position="0 0 0.5"
+          rotation="0 180 0">
         </a-entity>
       </a-marker>
 
-      <!-- Światło -->
-      <a-entity light="type: directional; intensity: 1" position="1 1 1"></a-entity>
-      <a-entity light="type: ambient; intensity: 0.5"></a-entity>
+      <!-- Światła -->
+      <a-entity light="type: ambient; intensity: 1"></a-entity>
+      <a-entity light="type: directional; intensity: 1" position="0 1 1"></a-entity>
 
       <!-- Kamera -->
       <a-entity camera></a-entity>
