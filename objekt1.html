@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Model AR bez markera</title>
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.min.js"></script>
+
     <style>
       body {
         margin: 0;
@@ -18,7 +20,6 @@
         display: block;
       }
 
-      /* Styl przycisku AR */
       .ar-button {
         position: absolute;
         bottom: 24px;
@@ -37,9 +38,14 @@
     </style>
   </head>
   <body>
+    <a-scene
+  embedded
+  vr-mode-ui="enabled: false"
+  arjs="sourceType: webcam; trackingMethod: best; debugUIEnabled: false;"
+>
+
     <model-viewer
       src="model.glb"
-      ios-src="model.usdz"
       ar
       ar-modes="scene-viewer webxr quick-look"
       ar-scale="auto"
@@ -51,5 +57,7 @@
     >
       <button slot="ar-button" class="ar-button">📱 Zobacz w AR</button>
     </model-viewer>
+    <a-entity camera></a-entity>
+  </a-scene>
   </body>
 </html>
