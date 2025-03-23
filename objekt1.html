@@ -1,36 +1,55 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <title>AR z kamerą i wyglądem jak model-viewer</title>
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Model AR bez markera</title>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
     <style>
-      body { margin: 0; overflow: hidden; }
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #000;
+      }
+
+      model-viewer {
+        width: 100vw;
+        height: 100vh;
+        display: block;
+      }
+
+      /* Styl przycisku AR */
+      .ar-button {
+        position: absolute;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #000;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 12px 24px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 1;
+      }
     </style>
   </head>
   <body>
-    <a-scene
-      vr-mode-ui="enabled: false"
-      embedded
-      arjs="sourceType: webcam; trackingMethod: best; debugUIEnabled: false;"
-      renderer="antialias: true; logarithmicDepthBuffer: true;"
+    <model-viewer
+      src="model.glb"
+      ar
+      ar-modes="scene-viewer webxr quick-look"
+      auto-rotate
+      camera-controls
+      environment-image="neutral"
+      exposure="1"
+      shadow-intensity="1"
+      style="width: 100vw; height: 100vh;"
     >
-      <!-- MODEL bez markera -->
-      <a-entity 
-        gltf-model="model.glb"
-        scale="1.5 1.5 1.5"
-        position="0 0 -3"
-        rotation="0 180 0"
-        animation-mixer>
-      </a-entity>
-
-      <!-- Światła -->
-      <a-entity light="type: ambient; intensity: 1.2"></a-entity>
-      <a-entity light="type: directional; intensity: 1.2" position="1 2 1"></a-entity>
-
-      <!-- Kamera -->
-      <a-entity camera></a-entity>
-    </a-scene>
+      <!-- Przycisk AR -->
+      <button slot="ar-button" class="ar-button">📱 Zobacz w AR</button>
+    </model-viewer>
   </body>
 </html>
