@@ -1,30 +1,28 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <title>AR bez markera</title>
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Model AR bez markera</title>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
     <style>
-      body { margin: 0; overflow: hidden; }
+      body { margin: 0; }
+      model-viewer {
+        width: 100vw;
+        height: 100vh;
+      }
     </style>
   </head>
   <body>
-    <a-scene
-    vr-mode-ui="enabled: false"
-    embedded
-    arjs="sourceType: webcam; trackingMethod: best; debugUIEnabled: false;"
-  >
-    <a-entity 
-      gltf-model="model.glb"
-      scale="2 2 2"
-      position="0 -1.5 -3"
-      rotation="0 180 0">
-    </a-entity>
-  
-    <a-entity light="type: ambient; intensity: 1.5"></a-entity>
-    <a-entity camera></a-entity>
-  </a-scene>
-  
+    <model-viewer
+      src="model.glb"
+      ar
+      ar-modes="scene-viewer webxr quick-look"
+      auto-rotate
+      camera-controls
+      environment-image="neutral"
+      exposure="1"
+      shadow-intensity="1"
+    >
+    </model-viewer>
   </body>
 </html>
