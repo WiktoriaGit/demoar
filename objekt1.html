@@ -5,10 +5,34 @@
     <title>Model AR bez markera</title>
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
     <style>
-      body { margin: 0; }
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #000;
+      }
+
       model-viewer {
         width: 100vw;
         height: 100vh;
+        display: block;
+      }
+
+      /* Styl przycisku AR */
+      .ar-button {
+        position: absolute;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #000;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 12px 24px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 1;
       }
     </style>
   </head>
@@ -22,7 +46,10 @@
       environment-image="neutral"
       exposure="1"
       shadow-intensity="1"
+      style="width: 100vw; height: 100vh;"
     >
+      <!-- Przycisk AR -->
+      <button slot="ar-button" class="ar-button">📱 Zobacz w AR</button>
     </model-viewer>
   </body>
 </html>
