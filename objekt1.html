@@ -1,15 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>AR – Dzieło 1</title>
+    <title>AR – Dzieło Beksińskiego</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.min.js"></script>
   </head>
   <body>
     <a-scene embedded arjs>
       <a-marker preset="hiro">
-        <a-entity gltf-model="model.glb" scale="0.5 0.5 0.5" position="0 0 0"></a-entity>
+        <!-- Twój model z poprawioną nazwą -->
+        <a-entity gltf-model="model.glb"
+                  scale="0.2 0.2 0.2"
+                  position="0 0 0.1"
+                  rotation="0 0 0">
+        </a-entity>
       </a-marker>
+
+      <!-- Światło -->
+      <a-entity light="type: directional; intensity: 1" position="1 1 1"></a-entity>
+      <a-entity light="type: ambient; intensity: 0.5"></a-entity>
+
+      <!-- Kamera -->
       <a-entity camera></a-entity>
     </a-scene>
   </body>
