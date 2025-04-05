@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>AR – Obraz na płasko na HIRO</title>
+    <title>AR – Obraz przyklejony do HIRO</title>
     <meta charset="utf-8" />
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.3.2/aframe/build/aframe-ar.min.js"></script>
     <style>
       body {
         margin: 0;
@@ -19,7 +19,14 @@
     >
       <!-- Marker HIRO -->
       <a-marker preset="hiro" id="marker">
-        <!-- Model zostanie dodany przez JS -->
+        <!-- Model pojawi się przez JS -->
+        <!-- Tekst podpisany dokładnie pod obrazem -->
+        <a-entity
+          id="label"
+          position="0 -0.55 0"
+          rotation="-90 0 0"
+          text="value: Zdzisław Beksiński; align: center; color: white; width: 2"
+        ></a-entity>
       </a-marker>
 
       <!-- Światła -->
@@ -37,9 +44,9 @@
       if (modelPath) {
         const model = document.createElement("a-entity");
         model.setAttribute("gltf-model", modelPath);
-        model.setAttribute("scale", "0.18 0.18 0.18");         // dopasuj rozmiar
-        model.setAttribute("position", "0 0 0.01");            // tuż nad markerem
-        model.setAttribute("rotation", "-90 0 0");             // płasko na markerze
+        model.setAttribute("scale", "0.18 0.18 0.18");     // dopasowany rozmiar
+        model.setAttribute("position", "0 0 0");           // dokładnie na markerze
+        model.setAttribute("rotation", "90 0 180");        // przodem, położony płasko
         document.getElementById("marker").appendChild(model);
       } else {
         alert("Brak modelu w ?model=...");
