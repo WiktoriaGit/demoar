@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>AR – Obraz na ścianie</title>
+    <title>AR – Obraz na płasko na HIRO</title>
     <meta charset="utf-8" />
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.min.js"></script>
@@ -15,18 +15,11 @@
   <body>
     <a-scene
       embedded
-      arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; smooth: true; smoothCount: 5"
+      arjs="sourceType: webcam; detectionMode: mono_and_matrix; smooth: true; smoothCount: 5"
     >
-      <!-- Marker Hiro -->
+      <!-- Marker HIRO -->
       <a-marker preset="hiro" id="marker">
         <!-- Model zostanie dodany przez JS -->
-
-        <!-- Podpis -->
-        <a-entity
-          position="0 -0.45 0"
-          rotation="-90 0 0"
-          text="value: Zdzisław Beksiński; align: center; color: white; width: 2"
-        ></a-entity>
       </a-marker>
 
       <!-- Światła -->
@@ -44,9 +37,9 @@
       if (modelPath) {
         const model = document.createElement("a-entity");
         model.setAttribute("gltf-model", modelPath);
-        model.setAttribute("scale", "0.18 0.18 0.18");     // dopasowana wielkość
-        model.setAttribute("position", "0 0 0.01");         // minimalnie przed markerem
-        model.setAttribute("rotation", "0 90 0");           // przodem jak na ścianie
+        model.setAttribute("scale", "0.18 0.18 0.18");         // dopasuj rozmiar
+        model.setAttribute("position", "0 0 0.01");            // tuż nad markerem
+        model.setAttribute("rotation", "-90 0 0");             // płasko na markerze
         document.getElementById("marker").appendChild(model);
       } else {
         alert("Brak modelu w ?model=...");
@@ -54,4 +47,3 @@
     </script>
   </body>
 </html>
-
