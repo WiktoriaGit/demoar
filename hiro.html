@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>AR – Beksiński w pełnej okazałości</title>
+    <title>AR – Model pionowy, na HIRO</title>
     <meta charset="utf-8">
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.3.2/aframe/build/aframe-ar.min.js"></script>
   </head>
   <body style="margin: 0; overflow: hidden">
     <a-scene embedded arjs>
-      <!-- Marker Hiro -->
-      <a-marker preset="hiro" id="marker">
-        <!-- Model pojawi się przez JS -->
-      </a-marker>
+      <!-- Marker -->
+      <a-marker preset="hiro" id="marker"></a-marker>
 
       <!-- Światła -->
       <a-entity light="type: ambient; intensity: 1.2"></a-entity>
@@ -28,10 +26,12 @@
       if (modelPath) {
         const model = document.createElement("a-entity");
         model.setAttribute("gltf-model", modelPath);
-        model.setAttribute("scale", "0.2 0.2 0.2"); // 2x większy niż poprzednio
-        model.setAttribute("position", "0 0 0.2"); // lekko nad markerem
-        model.setAttribute("rotation", "0 270 0"); // pełen front do widza
-        model.setAttribute("animation", "property: rotation; to: 0 630 0; loop: true; dur: 8000");
+
+        // Pionowy, duży model idealnie na środku HIRO
+        model.setAttribute("scale", "0.4 0.4 0.4");           // Duży rozmiar
+        model.setAttribute("position", "0 0 0");              // Środek markera
+        model.setAttribute("rotation", "0 180 0");            // Przodem do użytkownika
+
         document.getElementById("marker").appendChild(model);
       } else {
         alert("Brak modelu w ?model=...");
