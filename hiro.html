@@ -1,19 +1,47 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>AR – Model pionowy, na HIRO</title>
-    <meta charset="utf-8">
+    <title>AR – Beksiński na markerze HIRO</title>
+    <meta charset="utf-8" />
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.3.2/aframe/build/aframe-ar.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+      .label {
+        color: white;
+        background: black;
+        padding: 2px 4px;
+        font-family: sans-serif;
+        font-size: 12px;
+      }
+    </style>
   </head>
-  <body style="margin: 0; overflow: hidden">
-    <a-scene embedded arjs>
-      <!-- Marker -->
-      <a-marker preset="hiro" id="marker"></a-marker>
+  <body>
+    <a-scene
+      embedded
+      arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; smooth: true; smoothCount: 5"
+    >
+      <!-- Marker Hiro -->
+      <a-marker preset="hiro" id="marker">
+        <!-- Model zostanie dodany dynamicznie -->
+
+        <!-- Napisy (opcjonalnie) -->
+        <a-entity
+          position="0 -0.4 0"
+          rotation="-90 0 0"
+          text="value: Zdzisław Beksiński; align: center; color: white; width: 2"
+        ></a-entity>
+      </a-marker>
 
       <!-- Światła -->
       <a-entity light="type: ambient; intensity: 1.2"></a-entity>
-      <a-entity light="type: directional; intensity: 1" position="0 1 1"></a-entity>
+      <a-entity
+        light="type: directional; intensity: 1"
+        position="0 2 1"
+      ></a-entity>
 
       <!-- Kamera -->
       <a-entity camera></a-entity>
@@ -26,15 +54,16 @@
       if (modelPath) {
         const model = document.createElement("a-entity");
         model.setAttribute("gltf-model", modelPath);
-
-        // Pionowy, duży model idealnie na środku HIRO
-        model.setAttribute("scale", "0.4 0.4 0.4");           // Duży rozmiar
-        model.setAttribute("position", "0 0 0");              // Środek markera
-        model.setAttribute("rotation", "0 180 0");            // Przodem do użytkownika
-
+        model.setAttribute("scale", "0.2 0.2 0.2");      // większy
+        model.setAttribute("position", "0 0 0.2");       // lekko nad markerem
+        model.setAttribute("rotation", "0 90 0");        // przodem
+        model.setAttribute(
+          "animation",
+          "property: rotation; to: 0 450 0; loop: true; dur: 10000"
+        );
         document.getElementById("marker").appendChild(model);
       } else {
-        alert("Brak modelu w ?model=...");
+        alert("Brak modelu do wyświetlenia. Użyj ?model=ścieżka_do_modelu.glb");
       }
     </script>
   </body>
