@@ -21,9 +21,10 @@
       if (modelPath) {
         const model = document.createElement("a-entity");
         model.setAttribute("gltf-model", modelPath);
-        model.setAttribute("scale", "0.2 0.2 0.2");
-        model.setAttribute("position", "0 0 0.1");
-        model.setAttribute("rotation", "0 0 0");
+        model.setAttribute("scale", "0.1 0.1 0.1");
+model.setAttribute("position", "0 0 0.1");
+model.setAttribute("rotation", "0 0 0");
+
         document.getElementById("marker").appendChild(model);
       } else {
         alert("Nie podano modelu do wyświetlenia.");
