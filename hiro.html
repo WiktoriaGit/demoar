@@ -28,9 +28,9 @@
       if (modelPath) {
         const model = document.createElement("a-entity");
         model.setAttribute("gltf-model", modelPath);
-        model.setAttribute("scale", "0.12 0.12 0.12"); // Większy model
+        model.setAttribute("scale", "0.20 0.20 0.20"); // Większy model
         model.setAttribute("position", "0 0 0.6");     // Trochę wyżej
-        model.setAttribute("rotation", "0 180 0");     // Przodem do użytkownika
+        model.setAttribute("rotation", "0 260 0");     // Przodem do użytkownika
         document.getElementById("marker").appendChild(model);
       } else {
         alert("Brak modelu do wyświetlenia w ?model=...");
