@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Model AR</title>
+    <title>Model 3D – AR Beksiński</title>
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
     <style>
       body {
@@ -36,6 +36,7 @@
     </style>
   </head>
   <body>
+    <!-- Widok modelu 3D -->
     <model-viewer
       id="viewer"
       ar
@@ -47,17 +48,27 @@
       shadow-intensity="1"
       exposure="1"
     >
-      <button slot="ar-button" class="ar-button">📱 Zobacz w AR</button>
+      <!-- Przycisk przekierowujący do markerowego AR -->
+      <button slot="ar-button" class="ar-button" onclick="goToMarkerAR()">📱 Zobacz w AR</button>
     </model-viewer>
 
     <script>
+      // Pobranie ścieżki modelu z URL (np. ?model=obrazy/beksinski3.glb)
       const params = new URLSearchParams(window.location.search);
       const modelPath = params.get("model");
 
       if (modelPath) {
+        // Ustaw model 3D
         document.getElementById("viewer").setAttribute("src", modelPath);
       } else {
-        alert("Nie podano modelu do wyświetlenia!");
+        alert("Brak modelu do wyświetlenia!");
+      }
+
+      // Funkcja do przejścia na AR markerowe
+      function goToMarkerAR() {
+        if (modelPath) {
+          window.location.href = `hiro.html?model=${encodeURIComponent(modelPath)}`;
+        }
       }
     </script>
   </body>
