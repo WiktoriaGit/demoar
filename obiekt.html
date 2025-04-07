@@ -50,26 +50,27 @@
 
     <script>
       const params = new URLSearchParams(window.location.search);
-      const modelPath = params.get("model");
+const modelPath = params.get("model");
 
-      if (modelPath) {
-        document.getElementById("viewer").setAttribute("src", modelPath);
+if (modelPath) {
+  document.getElementById("viewer").setAttribute("src", modelPath);
 
-       
-        const match = modelPath.match(/beksinski(\\d+)\\.glb/);
-        if (match) {
-          const imageNumber = match[1];
-          window.goToMarkerAR = function () {
-            window.location.href = `hiro.html?img=obrazy/${imageNumber}.jpg`;
-          };
-        } else {
-          window.goToMarkerAR = function () {
-            alert("Nieprawidłowa nazwa pliku!");
-          };
-        }
-      } else {
-        alert("Brak modelu do wyświetlenia!");
-      }
+  // 🧠 NOWY sposób – wyciąga numer z końca nazwy pliku (np. beksinski5.glb)
+  const match = modelPath.match(/beksinski(\d+)\.glb$/);
+  if (match) {
+    const imageNumber = match[1];
+    window.goToMarkerAR = function () {
+      window.location.href = `hiro.html?img=obrazy/${imageNumber}.jpg`;
+    };
+  } else {
+    window.goToMarkerAR = function () {
+      alert("Nieprawidłowa nazwa pliku!");
+    };
+  }
+} else {
+  alert("Brak modelu do wyświetlenia!");
+}
+
     </script>
   </body>
 </html>
