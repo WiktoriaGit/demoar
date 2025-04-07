@@ -15,25 +15,27 @@
   <body>
     <a-scene embedded arjs>
       <a-marker preset="hiro" id="marker">
-        <!-- obraz będzie tutaj wstawiony przez JS -->
+        <!-- obraz pojawi się przez JavaScript -->
       </a-marker>
       <a-entity camera></a-entity>
     </a-scene>
 
     <script>
+      // Pobranie parametru img z adresu URL
       const params = new URLSearchParams(window.location.search);
-      const img = params.get("img");
+      const imgPath = params.get("img");
 
-      if (img) {
-        const plane = document.createElement("a-plane");
-        plane.setAttribute("src", img);
-        plane.setAttribute("rotation", "-90 0 0");
-        plane.setAttribute("width", "1");
-        plane.setAttribute("height", "1");
-        plane.setAttribute("material", "shader: flat");
-        document.getElementById("marker").appendChild(plane);
+      if (imgPath) {
+        const imagePlane = document.createElement("a-plane");
+        imagePlane.setAttribute("src", imgPath);
+        imagePlane.setAttribute("rotation", "-90 0 0"); // leży płasko na markerze
+        imagePlane.setAttribute("width", "1");
+        imagePlane.setAttribute("height", "1");
+        imagePlane.setAttribute("material", "shader: flat");
+
+        document.getElementById("marker").appendChild(imagePlane);
       } else {
-        alert("Brak obrazka do wyświetlenia.");
+        alert("Brak obrazka w ?img=...");
       }
     </script>
   </body>
