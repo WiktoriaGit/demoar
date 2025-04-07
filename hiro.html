@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>AR – Obraz przyklejony do HIRO</title>
+    <title>AR – Obraz na markerze</title>
     <meta charset="utf-8" />
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.3.2/aframe/build/aframe-ar.min.js"></script>
@@ -13,43 +13,27 @@
     </style>
   </head>
   <body>
-    <a-scene
-      embedded
-      arjs="sourceType: webcam; detectionMode: mono_and_matrix; smooth: true; smoothCount: 5"
-    >
-      <!-- Marker HIRO -->
+    <a-scene embedded arjs>
       <a-marker preset="hiro" id="marker">
-        <!-- Model pojawi się przez JS -->
-        <!-- Tekst podpisany dokładnie pod obrazem -->
-        <a-entity
-          id="label"
-          position="0 -0.55 0"
-          rotation="-90 0 0"
-          text="value: Zdzisław Beksiński; align: center; color: white; width: 2"
-        ></a-entity>
+        <!-- obraz będzie tutaj wstawiony przez JS -->
       </a-marker>
-
-      <!-- Światła -->
-      <a-entity light="type: ambient; intensity: 1.2"></a-entity>
-      <a-entity light="type: directional; intensity: 1" position="0 2 1"></a-entity>
-
-      <!-- Kamera -->
       <a-entity camera></a-entity>
     </a-scene>
 
     <script>
       const params = new URLSearchParams(window.location.search);
-      const modelPath = params.get("model");
+      const img = params.get("img");
 
-      if (modelPath) {
-        const model = document.createElement("a-entity");
-        model.setAttribute("gltf-model", modelPath);
-        model.setAttribute("scale", "0.18 0.18 0.18");     // dopasowany rozmiar
-        model.setAttribute("position", "0 0 0");           // dokładnie na markerze
-        model.setAttribute("rotation", "90 656 180");        // przodem, położony płasko
-        document.getElementById("marker").appendChild(model);
+      if (img) {
+        const plane = document.createElement("a-plane");
+        plane.setAttribute("src", img);
+        plane.setAttribute("rotation", "-90 0 0");
+        plane.setAttribute("width", "1");
+        plane.setAttribute("height", "1");
+        plane.setAttribute("material", "shader: flat");
+        document.getElementById("marker").appendChild(plane);
       } else {
-        alert("Brak modelu w ?model=...");
+        alert("Brak obrazka do wyświetlenia.");
       }
     </script>
   </body>
