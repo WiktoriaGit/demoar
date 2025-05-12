@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Model 3D – AR Beksiński</title>
+    <title>Model 3D – AR Galeria</title>
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
     <style>
       body {
@@ -54,18 +54,20 @@
 
       if (modelPath) {
         document.getElementById("viewer").setAttribute("src", modelPath);
-       const match = modelPath.match(/(beksinski|rozanski)(\d+)\.glb$/);
-if (match) {
-  const artist = match[1]; // "beksinski" lub "rozanski"
-  const imageNumber = match[2];
-  window.goToMarkerAR = function () {
-    window.location.href = `hiro.html?img=obrazy/${artist}${imageNumber}.jpg`;
-  };
-} else {
-  window.goToMarkerAR = function () {
-    alert("Nieprawidłowa nazwa pliku!");
-  };
-}
+        const filename = modelPath.split("/").pop(); // np. rozanski3.glb
+        const match = filename.match(/^([a-z]+)(\d+)\.glb$/i);
+
+        if (match) {
+          const artist = match[1]; // np. "rozanski"
+          const number = match[2]; // np. "3"
+          window.goToMarkerAR = function () {
+            window.location.href = `hiro.html?img=obrazy/${artist}${number}.jpg`;
+          };
+        } else {
+          window.goToMarkerAR = function () {
+            alert("Nieprawidłowa nazwa pliku modelu!");
+          };
+        }
       } else {
         alert("Brak modelu do wyświetlenia!");
       }
