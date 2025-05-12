@@ -54,17 +54,18 @@
 
       if (modelPath) {
         document.getElementById("viewer").setAttribute("src", modelPath);
-        const match = modelPath.match(/beksinski(\d+)\.glb$/);
-        if (match) {
-          const imageNumber = match[1];
-          window.goToMarkerAR = function () {
-            window.location.href = `hiro.html?img=obrazy/${imageNumber}.jpg`;
-          };
-        } else {
-          window.goToMarkerAR = function () {
-            alert("Nieprawidłowa nazwa pliku!");
-          };
-        }
+       const match = modelPath.match(/(beksinski|rozanski)(\d+)\.glb$/);
+if (match) {
+  const artist = match[1]; // "beksinski" lub "rozanski"
+  const imageNumber = match[2];
+  window.goToMarkerAR = function () {
+    window.location.href = `hiro.html?img=obrazy/${artist}${imageNumber}.jpg`;
+  };
+} else {
+  window.goToMarkerAR = function () {
+    alert("Nieprawidłowa nazwa pliku!");
+  };
+}
       } else {
         alert("Brak modelu do wyświetlenia!");
       }
