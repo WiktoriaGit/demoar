@@ -54,8 +54,6 @@
 
       if (modelPath) {
         document.getElementById("viewer").setAttribute("src", modelPath);
-
-        // 🧠 Wyciągamy numer z beksinskiX.glb → X
         const match = modelPath.match(/beksinski(\d+)\.glb$/);
         if (match) {
           const imageNumber = match[1];
