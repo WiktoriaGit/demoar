@@ -34,18 +34,23 @@
     </style>
   </head>
   <body>
-    <model-viewer
-      id="viewer"
-      ar
-      ar-modes="scene-viewer webxr quick-look"
-      ar-scale="auto"
-      auto-rotate
-      camera-controls
-      environment-image="neutral"
-      shadow-intensity="1"
-      exposure="1"
-       rotation="0 180deg 0"
-    >
+ <model-viewer
+  id="viewer"
+  ar
+  ar-modes="scene-viewer webxr quick-look"
+  ar-scale="auto"
+  auto-rotate
+  camera-controls
+  environment-image="neutral"
+  shadow-intensity="1"
+  exposure="1"
+  rotation="0 -90deg 0"
+   auto-rotate                    
+  rotation-per-second="20deg"    
+>
+  <button slot="ar-button" class="ar-button" onclick="goToMarkerAR()">📱 Zobacz w AR</button>
+</model-viewer>
+
       <button slot="ar-button" class="ar-button" onclick="goToMarkerAR()">📱 Zobacz w AR</button>
     </model-viewer>
 
