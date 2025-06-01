@@ -32,7 +32,7 @@
     const id = new URLSearchParams(window.location.search).get("id");
     if (id) {
       document.querySelector("#marker").setAttribute("url", `patt-markery/pattern-qr-${id}.patt`);
-      document.querySelector("#marker-image").setAttribute("src", `obrazy/${id}.jpg`);
+      document.querySelector("#marker-image").setAttribute("src", `obrazy/qr-${id}.jpg`);
     } else {
       alert("Brak ID w URL!");
     }
