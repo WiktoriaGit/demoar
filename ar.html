@@ -16,8 +16,13 @@
     </a-assets>
 
     <a-marker id="marker" type="pattern" preset="custom">
-<a-plane src="#marker-image" ...>
-
+      <!-- Obrazek wyświetlany na QR -->
+      <a-plane rotation="-90 0 0"
+               width="1"
+               height="1.25"
+               position="0 0 0"
+               material="src: #marker-image; side: double;">
+      </a-plane>
     </a-marker>
 
     <a-entity camera></a-entity>
@@ -26,10 +31,14 @@
   <script>
     const id = new URLSearchParams(window.location.search).get("id");
     if (id) {
-      document.querySelector("#marker").setAttribute("url", `patt-markery/qr-${id}.patt`);
-      document.querySelector("#marker-image").setAttribute("src", `obrazy/qr-${id}.jpg`);
+      const markerPath = `patt-markery/qr-${id}.patt`;
+      const imagePath = `obrazy/qr-${id}.jpg`;
+
+      document.querySelector("#marker").setAttribute("url", markerPath);
+      document.querySelector("#marker-image").setAttribute("src", imagePath);
+      console.log("✅ Ładowanie: ", markerPath, imagePath);
     } else {
-      alert("Brak ID w URL!");
+      alert("Brak ID w URL! Dodaj np. ?id=beksinski1");
     }
   </script>
 </body>
