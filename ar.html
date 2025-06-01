@@ -2,29 +2,20 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Obraz na QR</title>
+  <title>Model 3D na QR</title>
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.3.2/aframe/build/aframe-ar.min.js"></script>
-  <style>
-    body { margin: 0; overflow: hidden; }
-  </style>
+  <style> body { margin: 0; overflow: hidden; } </style>
 </head>
 <body>
   <a-scene embedded arjs>
-    <a-assets>
-      <img id="marker-image" src="">
-    </a-assets>
-
     <a-marker id="marker" type="pattern" preset="custom">
-<a-plane rotation="-90 0 0"
-         width="6"
-         height="7"
-         position="0 0 0"
-         material="src: #marker-image; side: double;">
-</a-plane>
-
-
-
+      <!-- Model GLB wczytany dynamicznie -->
+      <a-entity id="model"
+                rotation="0 0 0"
+                scale="0.5 0.5 0.5"
+                position="0 0 0">
+      </a-entity>
     </a-marker>
 
     <a-entity camera></a-entity>
@@ -33,14 +24,16 @@
   <script>
     const id = new URLSearchParams(window.location.search).get("id");
     if (id) {
-      const markerPath = `patt-markery/qr-${id}.patt`;
-      const imagePath = `obrazy/qr-${id}.jpg`;
+      const markerUrl = `patt-markery/qr-${id}.patt`;
+      const modelUrl = `obrazy/${id}.glb`;
 
-      document.querySelector("#marker").setAttribute("url", markerPath);
-      document.querySelector("#marker-image").setAttribute("src", imagePath);
-      console.log("✅ Ładowanie: ", markerPath, imagePath);
+      console.log("📦 Marker:", markerUrl);
+      console.log("🎨 Model:", modelUrl);
+
+      document.querySelector("#marker").setAttribute("url", markerUrl);
+      document.querySelector("#model").setAttribute("gltf-model", modelUrl);
     } else {
-      alert("Brak ID w URL! Dodaj np. ?id=beksinski1");
+      alert("Brak ID w URL (np. ?id=beksinski3)");
     }
   </script>
 </body>
