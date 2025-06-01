@@ -16,14 +16,16 @@
     </a-assets>
  
 
-    <a-marker id="marker" type="pattern" preset="custom">
-      <a-plane rotation="-90 0 0"
-               width="15"
-               height="15"
-               position="0 1 1"
-               material="src: #marker-image; side: double;">
-      </a-plane>
-    </a-marker>
+   <a-marker id="marker" type="pattern" preset="custom">
+  <a-entity position="0 0 0">
+    <a-plane rotation="0 0 0"
+             width="10"
+             height="10"
+             position="0 1 0"
+             material="src: #marker-image; side: double;">
+    </a-plane>
+  </a-entity>
+</a-marker>
 
     <a-entity camera></a-entity>
   </a-scene>
