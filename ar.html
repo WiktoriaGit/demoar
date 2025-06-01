@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>AR widok</title>
+  <title>Obraz na QR</title>
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.3.2/aframe/build/aframe-ar.min.js"></script>
   <style>
@@ -12,15 +12,17 @@
 <body>
   <a-scene embedded arjs>
     <a-assets>
-      <a-asset-item id="model" response-type="arraybuffer"></a-asset-item>
       <img id="marker-image" src="">
     </a-assets>
 
     <a-marker id="marker" type="pattern" preset="custom">
-      <a-plane rotation="-90 0 0" width="2" height="2.5" material="src: #marker-image"></a-plane>
-      <a-entity id="model-entity" position="0 0.2 0" scale="0.4 0.4 0.4"
-                animation="property: rotation; to: 0 360 0; loop: true; dur: 6000">
-      </a-entity>
+      <!-- Obraz przyklejony do QR -->
+      <a-plane rotation="-90 0 0"
+               width="2"
+               height="2.5"
+               position="0 0 0"
+               material="src: #marker-image">
+      </a-plane>
     </a-marker>
 
     <a-entity camera></a-entity>
@@ -31,8 +33,6 @@
     if (id) {
       document.querySelector("#marker").setAttribute("url", `patt-markery/pattern-qr-${id}.patt`);
       document.querySelector("#marker-image").setAttribute("src", `obrazy/${id}.jpg`);
-      document.querySelector("#model").setAttribute("src", `obrazy/${id}.glb`);
-      document.querySelector("#model-entity").setAttribute("gltf-model", "#model");
     } else {
       alert("Brak ID w URL!");
     }
