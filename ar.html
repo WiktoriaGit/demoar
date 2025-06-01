@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Obrazek AR – QR</title>
+  <title>Beksiński – AR QR</title>
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.3.2/aframe/build/aframe-ar.min.js"></script>
   <style>
@@ -14,18 +14,18 @@
     <a-assets>
       <img id="marker-image" src="">
     </a-assets>
+ 
 
-    <a-marker id="marker" type="pattern" preset="custom">
-      <a-entity id="image-container">
-        <a-plane id="image"
-                 rotation="0 0 0"
-                 width="5"
-                 height="5"
-                 position="0 1 0"
-                 material="src: #marker-image; side: double;">
-        </a-plane>
-      </a-entity>
-    </a-marker>
+   <a-marker id="marker" type="pattern" preset="custom">
+  <a-entity position="0 0 0">
+    <a-plane rotation="0 0 0"
+             width="5"
+             height="5"
+             position="0 1 0"
+             material="src: #marker-image; side: double;">
+    </a-plane>
+  </a-entity>
+</a-marker>
 
     <a-entity camera></a-entity>
   </a-scene>
@@ -33,35 +33,17 @@
   <script>
     const id = new URLSearchParams(window.location.search).get("id");
     if (id) {
-      document.querySelector("#marker").setAttribute("url", `patt-markery/qr-${id}.patt`);
-      document.querySelector("#marker-image").setAttribute("src", `obrazy/qr-${id}.jpg`);
+      const markerPath = `patt-markery/qr-${id}.patt`;
+      const imagePath = `obrazy/qr-${id}.jpg`;
+
+      document.querySelector("#marker").setAttribute("url", markerPath);
+      document.querySelector("#marker-image").setAttribute("src", imagePath);
+
+      console.log("🧩 Marker:", markerPath);
+      console.log("🖼️ Obraz:", imagePath);
+    } else {
+      alert("Brak ID w URL! Użyj np. ar.html?id=beksinski1");
     }
-
-    const scene = document.querySelector('a-scene');
-    let locked = false;
-
-    scene.addEventListener('click', () => {
-      if (locked) return;
-
-      const imageEntity = document.getElementById('image');
-
-      // Pobierz pozycję i rotację w przestrzeni świata
-      const position = imageEntity.object3D.getWorldPosition(new THREE.Vector3());
-      const rotation = imageEntity.object3D.getWorldRotation(new THREE.Euler());
-
-      // Stwórz nową "uwolnioną" wersję obrazka
-      const floating = document.createElement('a-plane');
-      floating.setAttribute('width', imageEntity.getAttribute('width'));
-      floating.setAttribute('height', imageEntity.getAttribute('height'));
-      floating.setAttribute('material', imageEntity.getAttribute('material'));
-      floating.setAttribute('position', `${position.x} ${position.y} ${position.z}`);
-      floating.setAttribute('rotation', `${THREE.Math.radToDeg(rotation.x)} ${THREE.Math.radToDeg(rotation.y)} ${THREE.Math.radToDeg(rotation.z)}`);
-      floating.setAttribute('side', 'double');
-
-      scene.appendChild(floating);
-      imageEntity.setAttribute('visible', 'false');
-      locked = true;
-    });
   </script>
 </body>
 </html>
