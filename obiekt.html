@@ -1,45 +1,70 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>AR – Model Beksiński na markerze HIRO</title>
-  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.3.2/aframe/build/aframe-ar.min.js"></script>
-  <style>
-    body { margin: 0; overflow: hidden; }
-  </style>
-</head>
-<body>
-  <a-scene embedded arjs="sourceType: webcam;">
-    <!-- Marker Hiro -->
-    <a-marker preset="hiro" id="marker">
-      <!-- Model zostanie dodany dynamicznie -->
-    </a-marker>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Model 3D – AR Galeria</title>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #000;
+      }
+      model-viewer {
+        width: 100vw;
+        height: 100vh;
+        display: block;
+      }
+      .ar-button {
+        position: absolute;
+        top: 80px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #000;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 12px 24px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <model-viewer
+      id="viewer"
+      ar
+      ar-modes="scene-viewer webxr quick-look"
+      ar-scale="auto"
+      auto-rotate
+      camera-controls
+      environment-image="neutral"
+      shadow-intensity="1"
+      exposure="1"
+       rotation="0 180deg 0"
+    >
+      <button slot="ar-button" class="ar-button" onclick="goToMarkerAR()">📱 Zobacz w AR</button>
+    </model-viewer>
 
-    <!-- Światła -->
-    <a-entity light="type: ambient; intensity: 1.2"></a-entity>
-    <a-entity light="type: directional; intensity: 1" position="0 2 1"></a-entity>
+    <script>
+     const params = new URLSearchParams(window.location.search);
+const modelPath = params.get("model");
 
-    <!-- Kamera -->
-    <a-entity camera></a-entity>
-  </a-scene>
+if (modelPath) {
+  document.getElementById("viewer").setAttribute("src", modelPath);
+  const filename = modelPath.split("/").pop(); // np. rozanski3.glb
+  const id = filename.replace(".glb", "");     // np. "rozanski3"
 
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const modelPath = params.get("model");
+  window.goToMarkerAR = function () {
+    window.location.href = `ar.html?id=${id}`;
+  };
+} else {
+  alert("Brak modelu do wyświetlenia!");
+}
 
-    if (modelPath) {
-      const model = document.createElement("a-entity");
-      model.setAttribute("gltf-model", modelPath);
-      model.setAttribute("scale", "0.2 0.2 0.2");         // zwiększona skala
-      model.setAttribute("position", "0 0 0.2");          // uniesiony nad markerem
-      model.setAttribute("rotation", "0 270 0");          // obrócony do widza
-      model.setAttribute("animation", "property: rotation; to: 0 630 0; loop: true; dur: 8000");
-
-      document.getElementById("marker").appendChild(model);
-    } else {
-      alert("Brak modelu w ?model=...");
-    }
-  </script>
-</body>
+    </script>
+  </body>
 </html>
