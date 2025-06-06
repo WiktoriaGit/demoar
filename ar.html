@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Beksiński – AR QR</title>
+  <title>AR – Obraz JPG na HIRO</title>
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.3.2/aframe/build/aframe-ar.min.js"></script>
   <style>
@@ -14,32 +14,28 @@
     <a-assets>
       <img id="marker-image" src="">
     </a-assets>
- 
 
-<a-marker preset="hiro">
-  <a-plane rotation="-90 0 0"
-           width="6"
-           height="6"
-           position="0 1 0"
-           material="src: #marker-image; side: double;">
-  </a-plane>
-</a-marker>
+    <!-- Marker HIRO -->
+    <a-marker preset="hiro">
+      <a-plane rotation="-90 0 0"
+               width="2"
+               height="2"
+               position="0 0 0"
+               material="src: #marker-image; side: double;">
+      </a-plane>
+    </a-marker>
+
     <a-entity camera></a-entity>
   </a-scene>
 
   <script>
     const id = new URLSearchParams(window.location.search).get("id");
     if (id) {
-      const markerPath = `obrazy/hiro.jpg`;
-      const imagePath = `obrazy/qr-${id}.jpg`;
-
-      document.querySelector("#marker").setAttribute("url", markerPath);
-      document.querySelector("#marker-image").setAttribute("src", imagePath);
-
-      console.log(" Marker:", markerPath);
-      console.log(" Obraz:", imagePath);
+      const path = `obrazy/qr-${id}.jpg`;
+      document.querySelector("#marker-image").setAttribute("src", path);
+      console.log("✅ Obraz wczytany:", path);
     } else {
-      alert("Brak ID w URL! Użyj np. ar.html?id=beksinski1");
+      alert("Brak ID w URL! Użyj np. ar.html?id=rozanski1");
     }
   </script>
 </body>
