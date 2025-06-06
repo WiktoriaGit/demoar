@@ -47,7 +47,7 @@
       if (modelPath) {
         document.getElementById("viewer").setAttribute("src", modelPath);
         const filename = modelPath.split("/").pop(); // np. beksinski1.glb
-        const id = filename.replace(".glb", "");
+        const id = filename.replace(".glb", ".jpg");
         window.goToMarkerAR = function () {
           window.location.href = `ar.html?id=${id}`;
         };
