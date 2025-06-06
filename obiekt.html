@@ -51,22 +51,24 @@
     </model-viewer>
 
     <script>
-      const params = new URLSearchParams(window.location.search);
-      const modelPath = params.get("model");
+  const params = new URLSearchParams(window.location.search);
+  const modelPath = params.get("model");
 
-      if (modelPath) {
-        document.getElementById("viewer").setAttribute("src", modelPath);
+  if (modelPath) {
+    document.getElementById("viewer").setAttribute("src", modelPath);
 
-        const filename = modelPath.split("/").pop(); // np. rozanski3.glb
-        const id = filename.replace(".glb", "");     // np. rozanski3
+    // WYCIĄGAMY ID z nazwy pliku glb
+    const filename = modelPath.split("/").pop(); // np. rozanski3.glb
+    const id = filename.replace(".glb", "");     // np. "rozanski3"
 
-        window.goToMarkerAR = function () {
-          // przejście do markerowego AR tylko z JPG
-          window.location.href = `ar.html?id=${id}`;
-        };
-      } else {
-        alert("Brak modelu do wyświetlenia!");
-      }
+    // Przycisk przekierowuje do ar.html?id=...
+    window.goToMarkerAR = function () {
+      window.location.href = `ar.html?id=${id}`;
+    };
+  } else {
+    alert("Brak modelu do wyświetlenia!");
+  }
+
     </script>
   </body>
 </html>
