@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>AR na Hiro</title>
+  <title>AR – Obraz JPG na Hiro</title>
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.3.2/aframe/build/aframe-ar.min.js"></script>
   <style> body { margin: 0; overflow: hidden; } </style>
 </head>
 <body>
@@ -30,8 +30,9 @@
     if (id) {
       const path = `obrazy/qr-${id}.jpg`;
       document.querySelector("#marker-image").setAttribute("src", path);
+      console.log("✅ Ładowanie obrazu:", path);
     } else {
-      alert("Brak ID w URL!");
+      alert("Brak ID w URL. Użyj np. ar.html?id=beksinski1");
     }
   </script>
 </body>
