@@ -14,33 +14,29 @@
     <a-assets>
       <img id="marker-image" src="">
     </a-assets>
- 
 
-<a-marker id="marker" type="pattern" preset="custom">
-  <a-plane rotation="-90 0 0"
-           width="6"
-           height="6"
-           position="0 1 0"
-           material="src: #marker-image; side: double;">
-  </a-plane>
-</a-marker>
+    <a-marker type="pattern" url="obrazy/hiro.jpg">
+      <a-plane rotation="-90 0 0"
+               width="6"
+               height="6"
+               position="0 1 0"
+               material="src: #marker-image; side: double;">
+      </a-plane>
+    </a-marker>
+
     <a-entity camera></a-entity>
   </a-scene>
 
   <script>
     const id = new URLSearchParams(window.location.search).get("id");
     if (id) {
-      const markerPath = `patt-markery/qr-${id}.patt`;
       const imagePath = `obrazy/qr-${id}.jpg`;
-
-      document.querySelector("#marker").setAttribute("url", markerPath);
       document.querySelector("#marker-image").setAttribute("src", imagePath);
-
-      console.log("🧩 Marker:", markerPath);
-      console.log("🖼️ Obraz:", imagePath);
+      console.log(" Obraz:", imagePath);
     } else {
       alert("Brak ID w URL! Użyj np. ar.html?id=beksinski1");
     }
   </script>
 </body>
 </html>
+
