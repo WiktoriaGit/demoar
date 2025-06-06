@@ -41,19 +41,23 @@
     </model-viewer>
 
     <script>
-      const params = new URLSearchParams(window.location.search);
-      const modelPath = params.get("model");
+  const params = new URLSearchParams(window.location.search);
+  const modelPath = params.get("model");
 
-      if (modelPath) {
-        document.getElementById("viewer").setAttribute("src", modelPath);
-        const filename = modelPath.split("/").pop(); // np. beksinski1.glb
-        const id = filename.replace(".glb", ".jpg");
-        window.goToMarkerAR = function () {
-          window.location.href = `ar.html?id=${id}`;
-        };
-      } else {
-        alert("Brak modelu do wyświetlenia!");
-      }
-    </script>
+  if (modelPath) {
+    document.getElementById("viewer").setAttribute("src", modelPath);
+
+    const filename = modelPath.split("/").pop();       // np. "beksinski7.glb"
+    const name = filename.replace(".glb", "");          // np. "beksinski7"
+    const id = `qr-${name}.jpg`;                        // wynik: "qr-beksinski7.jpg"
+
+    window.goToMarkerAR = function () {
+      window.location.href = `ar.html?id=${id}`;
+    };
+  } else {
+    alert("Brak modelu do wyświetlenia!");
+  }
+</script>
+
   </body>
 </html>
