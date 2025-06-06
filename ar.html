@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>AR – Obraz lub Model 3D na Hiro</title>
+  <title>Beksiński – AR obraz na Hiro</title>
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.3.2/aframe/build/aframe-ar.min.js"></script>
   <style>
@@ -16,44 +16,26 @@
     </a-assets>
 
     <!-- Marker Hiro -->
-    <a-marker preset="hiro" id="marker">
-      <!-- Obiekt dodany przez JS -->
+    <a-marker preset="hiro">
+      <a-plane rotation="-90 0 0"
+               width="2"
+               height="2"
+               position="0 0 0"
+               material="src: #marker-image; side: double;">
+      </a-plane>
     </a-marker>
 
     <a-entity camera></a-entity>
   </a-scene>
 
   <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get("id");
-    const type = urlParams.get("type"); // 'jpg' lub 'glb'
-
-    const marker = document.getElementById("marker");
-
-    if (!id || !type) {
-      alert("Brakuje parametrów w adresie URL. Użyj np. ar.html?id=beksinski1&type=jpg");
-    } else if (type === "jpg") {
+    const id = new URLSearchParams(window.location.search).get("id");
+    if (id) {
       const path = `obrazy/qr-${id}.jpg`;
       document.querySelector("#marker-image").setAttribute("src", path);
-
-      const plane = document.createElement("a-plane");
-      plane.setAttribute("rotation", "-90 0 0");
-      plane.setAttribute("width", "2");
-      plane.setAttribute("height", "2");
-      plane.setAttribute("position", "0 0 0");
-      plane.setAttribute("material", "src: #marker-image; side: double;");
-      marker.appendChild(plane);
-    } else if (type === "glb") {
-      const path = `obrazy/${id}.glb`;
-      const model = document.createElement("a-entity");
-      model.setAttribute("gltf-model", path);
-      model.setAttribute("scale", "0.2 0.2 0.2");
-      model.setAttribute("position", "0 0 0.2");
-      model.setAttribute("rotation", "0 270 0");
-      model.setAttribute("animation", "property: rotation; to: 0 630 0; loop: true; dur: 8000");
-      marker.appendChild(model);
+      console.log("✅ Ładowanie obrazu:", path);
     } else {
-      alert("Nieobsługiwany typ. Użyj type=jpg lub type=glb");
+      alert("Brak ID w URL. Użyj np. ar.html?id=beksinski1");
     }
   </script>
 </body>
