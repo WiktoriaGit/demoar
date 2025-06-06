@@ -1,72 +1,43 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Model 3D – AR Galeria</title>
-    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        background-color: #000;
-      }
-      model-viewer {
-        width: 100vw;
-        height: 100vh;
-        display: block;
-      }
-      .ar-button {
-  position: absolute;
-  top: 60px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #000;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 18px 36px;
-  font-size: 20px;
-  font-weight: bold;
-  cursor: pointer;
-  z-index: 1;
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
-}
+<head>
+  <meta charset="UTF-8">
+  <title>AR – Obraz JPG na markerze HIRO</title>
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.3.2/aframe/build/aframe-ar.min.js"></script>
+  <style>
+    body { margin: 0; overflow: hidden; }
+  </style>
+</head>
+<body>
+  <a-scene embedded arjs>
+    <a-assets>
+      <img id="marker-image" src="">
+    </a-assets>
 
-    </style>
-  </head>
-  <body>
-    <model-viewer
-      id="viewer"
-      ar
-      ar-modes="scene-viewer webxr quick-look"
-      ar-scale="auto"
-      auto-rotate
-      camera-controls
-      environment-image="neutral"
-      shadow-intensity="1"
-      exposure="1"
-       rotation="0 180deg 0"
-    >
-      <button slot="ar-button" class="ar-button" onclick="goToMarkerAR()">📱 Zobacz w AR</button>
-    </model-viewer>
+    <!-- Marker HIRO -->
+    <a-marker preset="hiro">
+      <a-plane
+        rotation="-90 0 0"
+        width="2"
+        height="2"
+        position="0 0 0"
+        material="src: #marker-image; side: double;">
+      </a-plane>
+    </a-marker>
 
-    <script>
-     const params = new URLSearchParams(window.location.search);
-const modelPath = params.get("model");
+    <a-entity camera></a-entity>
+  </a-scene>
 
-if (modelPath) {
-  document.getElementById("viewer").setAttribute("src", modelPath);
-  const filename = modelPath.split("/").pop(); // np. rozanski3.glb
-  const id = filename.replace(".glb", "");     // np. "rozanski3"
-
-  window.goToMarkerAR = function () {
-    window.location.href = `ar.html?id=${id}`;
-  };
-} else {
-  alert("Brak modelu do wyświetlenia!");
-}
-
-    </script>
-  </body>
+  <script>
+    const id = new URLSearchParams(window.location.search).get("id");
+    if (id) {
+      const path = `obrazy/qr-${id}.jpg`;  
+      document.querySelector("#marker-image").setAttribute("src", path);
+      console.log("✅ Ładowanie obrazu:", path);
+    } else {
+      alert("Brak ID w URL. Użyj np. hiro.html?id=beksinski1");
+    }
+  </script>
+</body>
 </html>
