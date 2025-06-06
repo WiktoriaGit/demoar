@@ -1,74 +1,42 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Model 3D – AR Galeria</title>
-    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        background-color: #000;
-      }
-      model-viewer {
-        width: 100vw;
-        height: 100vh;
-        display: block;
-      }
-      .ar-button {
-        position: absolute;
-        top: 60px;
-        left: 50%;
-        transform: translateX(-50%);
-        background-color: #000;
-        color: #fff;
-        border: none;
-        border-radius: 8px;
-        padding: 18px 36px;
-        font-size: 20px;
-        font-weight: bold;
-        cursor: pointer;
-        z-index: 1;
-        box-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
-      }
-    </style>
-  </head>
-  <body>
-    <model-viewer
-      id="viewer"
-      ar
-      ar-modes="scene-viewer webxr quick-look"
-      ar-scale="auto"
-      auto-rotate
-      camera-controls
-      environment-image="neutral"
-      shadow-intensity="1"
-      exposure="1"
-      rotation="0 180deg 0"
-    >
-      <button slot="ar-button" class="ar-button" onclick="goToMarkerAR()">📱 Zobacz w AR</button>
-    </model-viewer>
+<head>
+  <meta charset="UTF-8">
+  <title>Model 3D na Hiro</title>
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.3.2/aframe/build/aframe-ar.min.js"></script>
+  <style>
+    body { margin: 0; overflow: hidden; }
+  </style>
+</head>
+<body>
+  <a-scene embedded arjs>
+    <!-- Marker Hiro -->
+    <a-marker preset="hiro" id="hiro-marker">
+      <!-- Model 3D zostanie dodany dynamicznie tutaj -->
+    </a-marker>
 
-    <script>
-  const params = new URLSearchParams(window.location.search);
-  const modelPath = params.get("model");
+    <a-entity camera></a-entity>
+  </a-scene>
 
-  if (modelPath) {
-    document.getElementById("viewer").setAttribute("src", modelPath);
+  <script>
+    const id = new URLSearchParams(window.location.search).get("id");
 
-    // WYCIĄGAMY ID z nazwy pliku glb
-    const filename = modelPath.split("/").pop(); // np. rozanski3.glb
-    const id = filename.replace(".glb", "");     // np. "rozanski3"
+    if (id) {
+      const modelPath = `obrazy/${id}.glb`;
 
-    // Przycisk przekierowuje do ar.html?id=...
-    window.goToMarkerAR = function () {
-      window.location.href = `ar.html?id=${id}`;
-    };
-  } else {
-    alert("Brak modelu do wyświetlenia!");
-  }
+      const model = document.createElement("a-entity");
+      model.setAttribute("gltf-model", `url(${modelPath})`);
+      model.setAttribute("scale", "0.5 0.5 0.5");
+      model.setAttribute("position", "0 0 0");
+      model.setAttribute("rotation", "0 180 0");
 
-    </script>
-  </body>
+      document.querySelector("#hiro-marker").appendChild(model);
+
+      console.log("✅ Załadowano model:", modelPath);
+    } else {
+      alert("Brak ID w URL. Użyj np. ar.html?id=beksinski1");
+    }
+  </script>
+</body>
 </html>
