@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>AR – Obraz JPG lub Model GLB na markerze HIRO</title>
+  <title>Beksiński – AR QR</title>
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.3.2/aframe/build/aframe-ar.min.js"></script>
   <style>
@@ -10,24 +10,18 @@
   </style>
 </head>
 <body>
-  <a-scene embedded arjs="sourceType: webcam;">
+  <a-scene embedded arjs>
     <a-assets>
       <img id="marker-image" src="">
     </a-assets>
 
-    <!-- ✅ Klasyczny marker HIRO -->
-    <a-marker preset="hiro" id="hiro-marker">
-      <!-- JPG będzie tutaj -->
-      <a-plane
-        id="image-plane"
-        rotation="-90 0 0"
-        width="2"
-        height="2"
-        position="0 0 0"
-        material="src: #marker-image; side: double;"
-        visible="false">
+    <a-marker type="pattern" url="obrazy/hiro.jpg">
+      <a-plane rotation="-90 0 0"
+               width="6"
+               height="6"
+               position="0 1 0"
+               material="src: #marker-image; side: double;">
       </a-plane>
-      <!-- GLB będzie dynamicznie dołączony -->
     </a-marker>
 
     <a-entity camera></a-entity>
@@ -35,31 +29,14 @@
 
   <script>
     const id = new URLSearchParams(window.location.search).get("id");
-
     if (id) {
-      const isModel = id.endsWith('.glb');
-      const marker = document.getElementById("hiro-marker");
-
-      if (isModel) {
-        // ✅ Załaduj model GLB
-        const model = document.createElement("a-entity");
-        model.setAttribute("gltf-model", `obrazy/${id}`);
-        model.setAttribute("scale", "0.2 0.2 0.2");
-        model.setAttribute("position", "0 0 0.2");
-        model.setAttribute("rotation", "0 270 0");
-        model.setAttribute("animation", "property: rotation; to: 0 630 0; loop: true; dur: 8000");
-        marker.appendChild(model);
-        console.log("🧩 Załadowano model:", `obrazy/${id}`);
-      } else {
-        // ✅ Załaduj obraz JPG
-        const imagePath = `obrazy/qr-${id}.jpg`;
-        document.getElementById("marker-image").setAttribute("src", imagePath);
-        document.getElementById("image-plane").setAttribute("visible", "true");
-        console.log("🖼️ Załadowano obraz:", imagePath);
-      }
+      const imagePath = `obrazy/qr-${id}.jpg`;
+      document.querySelector("#marker-image").setAttribute("src", imagePath);
+      console.log(" Obraz:", imagePath);
     } else {
-      alert("❌ Brak ID w URL! Użyj np.: hiro.html?id=beksinski1 albo hiro.html?id=rozanski1.glb");
+      alert("Brak ID w URL! Użyj np. ar.html?id=beksinski1");
     }
   </script>
 </body>
 </html>
+
