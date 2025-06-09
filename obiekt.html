@@ -2,11 +2,20 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Model 3D – Galeria</title>
+    <title>Model 3D – AR Galeria</title>
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
     <style>
-      body { margin: 0; background-color: #000; overflow: hidden; }
-      model-viewer { width: 100vw; height: 100vh; }
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #000;
+      }
+      model-viewer {
+        width: 100vw;
+        height: 100vh;
+        display: block;
+      }
       .ar-button {
         position: absolute;
         top: 60px;
@@ -21,6 +30,7 @@
         font-weight: bold;
         cursor: pointer;
         z-index: 1;
+        box-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
       }
     </style>
   </head>
@@ -41,23 +51,21 @@
     </model-viewer>
 
     <script>
-  const params = new URLSearchParams(window.location.search);
-  const modelPath = params.get("model");
+      const params = new URLSearchParams(window.location.search);
+      const modelPath = params.get("model");
 
-  if (modelPath) {
-    document.getElementById("viewer").setAttribute("src", modelPath);
+      if (modelPath) {
+        document.getElementById("viewer").setAttribute("src", modelPath);
 
-    const filename = modelPath.split("/").pop();       // np. "beksinski7.glb"
-    const name = filename.replace(".glb", "");          // np. "beksinski7"
-    const id = `qr-${name}.jpg`;                        // wynik: "qr-beksinski7.jpg"
+        const filename = modelPath.split("/").pop(); // np. beksinski7.glb
+        const id = filename.replace(".glb", "");     // = "beksinski7"
 
-    window.goToMarkerAR = function () {
-      window.location.href = `ar.html?id=${id}`;
-    };
-  } else {
-    alert("Brak modelu do wyświetlenia!");
-  }
-</script>
-
+        window.goToMarkerAR = function () {
+          window.location.href = `ar.html?id=${id}`;
+        };
+      } else {
+        alert("Brak modelu do wyświetlenia!");
+      }
+    </script>
   </body>
 </html>
