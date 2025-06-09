@@ -2,12 +2,10 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Beksiński – AR na Hiro</title>
+  <title>AR – Beksiński na Hiro</title>
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.3.2/aframe/build/aframe-ar.min.js"></script>
-  <style>
-    body { margin: 0; overflow: hidden; }
-  </style>
+  <style>body { margin: 0; overflow: hidden; }</style>
 </head>
 <body>
   <a-scene embedded arjs="sourceType: webcam;">
@@ -30,11 +28,11 @@
   <script>
     const id = new URLSearchParams(window.location.search).get("id");
     if (id) {
-      const path = `obrazy/qr-${id}.jpg`;
-      document.querySelector("#marker-image").setAttribute("src", path);
-      console.log("✅ Ładowanie obrazu:", path);
+      const imagePath = `${id}`;
+      document.querySelector("#marker-image").setAttribute("src", imagePath);
+      console.log("✅ Załadowano:", imagePath);
     } else {
-      alert("Brak ID w URL. Użyj np. ar.html?id=beksinski1");
+      alert("Brak ID w URL. Użyj np. ar.html?id=beksinski7");
     }
   </script>
 </body>
