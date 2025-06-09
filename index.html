@@ -2,80 +2,127 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <title>Wirtualna Galeria Beksińskiego – QR do AR</title>
+  <title>Wirtualna Galeria – QR do AR</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background-color: #f4f4f4;
-    }
-    h1 {
-      margin-top: 20px;
-    }
-    .gallery {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      padding: 20px;
-    }
-    .qr-item {
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      padding: 10px;
-      width: 220px;
-    }
-    .qr-item img {
-      width: 200px;
-      height: 200px;
-      object-fit: contain;
-    }
-    .qr-item p {
-      margin-top: 8px;
-      font-weight: bold;
-    }
-    .ar-button {
-      background-color: #000;
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      padding: 10px 20px;
-      cursor: pointer;
-      margin-top: 8px;
-    }
+    body { font-family: Arial, sans-serif; text-align: center; background-color: #f4f4f4; }
+    h1 { margin-top: 20px; }
+    .gallery { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px; }
+    .qr-item { background: white; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); padding: 10px; width: 220px; }
+    .qr-item img { width: 200px; height: 200px; object-fit: contain; }
+    .qr-item p { margin-top: 8px; font-weight: bold; }
   </style>
 </head>
 <body>
-  <h1>Wirtualna Galeria Beksińskiego – Skanuj kod QR</h1>
+  <h1>Wirtualna Galeria – Skanuj kod QR</h1>
   <div class="gallery">
-
-    <!-- Beksiński 1–12 -->
-    ${[...Array(12)].map((_, i) => {
-      const index = i + 1;
-      return `
-      <div class="qr-item">
-        <img src="obrazy/qr-beksinski${index}.jpg" alt="QR Beksiński ${index}">
-        <p>Dzieło ${index}</p>
-        <a href="ar.html?id=obrazy/beksinski${index}.jpg">
-          <button class="ar-button">📱 Zobacz w AR</button>
-        </a>
-      </div>`;
-    }).join('')}
-
-    <!-- Różański 1–6 -->
-    ${[...Array(6)].map((_, i) => {
-      const index = i + 1;
-      return `
-      <div class="qr-item">
-        <img src="obrazy/qr-rozanski${index}.jpg" alt="QR Różański ${index}">
-        <p>Różański – Dzieło ${index}</p>
-        <a href="ar.html?id=obrazy/rozanski${index}.jpg">
-          <button class="ar-button">📱 Zobacz w AR</button>
-        </a>
-      </div>`;
-    }).join('')}
-
+    <div class="qr-item">
+      <a href="ar.html?id=beksinski1">
+        <img src="qrcodes/qr-beksinski1.png" alt="QR Dzieło 1">
+      </a>
+      <p>Dzieło 1</p>
+    </div>
+    <div class="qr-item">
+      <a href="ar.html?id=beksinski2">
+        <img src="qrcodes/qr-beksinski2.png" alt="QR Dzieło 2">
+      </a>
+      <p>Dzieło 2</p>
+    </div>
+    <div class="qr-item">
+      <a href="ar.html?id=beksinski3">
+        <img src="qrcodes/qr-beksinski3.png" alt="QR Dzieło 3">
+      </a>
+      <p>Dzieło 3</p>
+    </div>
+    <div class="qr-item">
+      <a href="ar.html?id=beksinski4">
+        <img src="qrcodes/qr-beksinski4.png" alt="QR Dzieło 4">
+      </a>
+      <p>Dzieło 4</p>
+    </div>
+    <div class="qr-item">
+      <a href="ar.html?id=beksinski5">
+        <img src="qrcodes/qr-beksinski5.png" alt="QR Dzieło 5">
+      </a>
+      <p>Dzieło 5</p>
+    </div>
+    <div class="qr-item">
+      <a href="ar.html?id=beksinski6">
+        <img src="qrcodes/qr-beksinski6.png" alt="QR Dzieło 6">
+      </a>
+      <p>Dzieło 6</p>
+    </div>
+    <div class="qr-item">
+      <a href="ar.html?id=beksinski7">
+        <img src="qrcodes/qr-beksinski7.png" alt="QR Dzieło 7">
+      </a>
+      <p>Dzieło 7</p>
+    </div>
+    <div class="qr-item">
+      <a href="ar.html?id=beksinski8">
+        <img src="qrcodes/qr-beksinski8.png" alt="QR Dzieło 8">
+      </a>
+      <p>Dzieło 8</p>
+    </div>
+    <div class="qr-item">
+      <a href="ar.html?id=beksinski9">
+        <img src="qrcodes/qr-beksinski9.png" alt="QR Dzieło 9">
+      </a>
+      <p>Dzieło 9</p>
+    </div>
+    <div class="qr-item">
+      <a href="ar.html?id=beksinski10">
+        <img src="qrcodes/qr-beksinski10.png" alt="QR Dzieło 10">
+      </a>
+      <p>Dzieło 10</p>
+    </div>
+    <div class="qr-item">
+      <a href="ar.html?id=beksinski11">
+        <img src="qrcodes/qr-beksinski11.png" alt="QR Dzieło 11">
+      </a>
+      <p>Dzieło 11</p>
+    </div>
+    <div class="qr-item">
+      <a href="ar.html?id=beksinski12">
+        <img src="qrcodes/qr-beksinski12.png" alt="QR Dzieło 12">
+      </a>
+      <p>Dzieło 12</p>
+    </div>
+    <div class="qr-item">
+      <a href="ar.html?id=rozanski1">
+        <img src="qrcodes/qr-rozanski1.png" alt="QR Różański 1">
+      </a>
+      <p>Różański – Dzieło 1</p>
+    </div>
+    <div class="qr-item">
+      <a href="ar.html?id=rozanski2">
+        <img src="qrcodes/qr-rozanski2.png" alt="QR Różański 2">
+      </a>
+      <p>Różański – Dzieło 2</p>
+    </div>
+    <div class="qr-item">
+      <a href="ar.html?id=rozanski3">
+        <img src="qrcodes/qr-rozanski3.png" alt="QR Różański 3">
+      </a>
+      <p>Różański – Dzieło 3</p>
+    </div>
+    <div class="qr-item">
+      <a href="ar.html?id=rozanski4">
+        <img src="qrcodes/qr-rozanski4.png" alt="QR Różański 4">
+      </a>
+      <p>Różański – Dzieło 4</p>
+    </div>
+    <div class="qr-item">
+      <a href="ar.html?id=rozanski5">
+        <img src="qrcodes/qr-rozanski5.png" alt="QR Różański 5">
+      </a>
+      <p>Różański – Dzieło 5</p>
+    </div>
+    <div class="qr-item">
+      <a href="ar.html?id=rozanski6">
+        <img src="qrcodes/qr-rozanski6.png" alt="QR Różański 6">
+      </a>
+      <p>Różański – Dzieło 6</p>
+    </div>
   </div>
 </body>
 </html>
