@@ -24,16 +24,15 @@
 
     <a-entity camera></a-entity>
   </a-scene>
-<script>
-  const id = new URLSearchParams(window.location.search).get("id");
-  if (id) {
-    const imagePath = `obrazy/qr-${id}.jpg`; // ← DODANA ŚCIEŻKA I PREFIX
-    document.querySelector("#marker-image").setAttribute("src", imagePath);
-    console.log("✅ Załadowano:", imagePath);
-  } else {
-    alert("Brak ID w URL. Użyj np. ar.html?id=beksinski7");
-  }
-</script>
 
+  <script>
+    const id = new URLSearchParams(window.location.search).get("id");
+    if (id) {
+      document.querySelector("#marker-image").setAttribute("src", id);
+      console.log("✅ Załadowano obraz:", id);
+    } else {
+      alert("❌ Brak ID w URL. Przykład: ar.html?id=obrazy/beksinski1.jpg");
+    }
+  </script>
 </body>
 </html>
